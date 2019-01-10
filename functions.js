@@ -243,39 +243,98 @@
 		cl( text );
 	}
 
-	function slideGo( selector ) {
+	/**
+	 * Включение следующего слайда
+	 *
+	 * @param selector
+	 */
+	function slideGo1( selector ) {
+
+
+		// определение элемента - слайдер
 		let slider = document.querySelector( selector );
-		let nextslide = slider.getAttribute('data-active-slide');
-		if(undefined===nextslide){
+
+		// определение индекса активного слайда
+		let nextslide = slider.getAttribute( 'data-active-slide' );
+
+		// если индекс не определен
+		if ( undefined === nextslide ) {
+
+			// следующим слайдом следует считать 0-й
 			nextslide = 0;
-		}else{
+		} else {
+
+			// определение индекса следующего слайда
 			nextslide++;
 		}
 
+		// определение всех слайдов внутри слайдера
+		let slides = slider.querySelectorAll( selector + ' > .js-slide' );
 
-		let slides = slider.querySelectorAll( '.js-slide' );
+		// перебор слайдов
 		slides.forEach( function ( slide, i ) {
+
+			// добавление скрывающего класса
 			slides[ i ].classList.add( 'hidden' );
 		} );
+
+		// удаление скрывающего класса со слайда, на который произошло переключение
 		slides[ nextslide ].classList.remove( 'hidden' );
+
+		// указание индекса текущего слайда в атрибуте слайдера
 		slider.setAttribute( 'data-active-slide', nextslide );
 	}
 
+	/**
+	 * Переход на следующий слайд
+	 *
+	 * @param event
+	 */
 	function nextSlide( event ) {
+
 		let button = event.target;
 
-		let slider_selector = button.getAttribute( 'data-slider' );
-		let slider = document.querySelector('.'+slider_selector);
-		cl(slider);
-		let slides_count = slider.querySelectorAll('.js-slide').length;
-		let nextslide = slider.getAttribute('data-active-slide');
-		cl(slides_count);
-		cl(nextslide);
-		if(slides_count<nextslide){
-			button.classList.add('hidden');
-		}else{
-			slideGo( '.' + slider_selector );
+		// определение селектора слайдера
+		let selector = button.getAttribute( 'data-slider' );
+
+		// определение элемента - слайдер
+		let slider = document.querySelector( '.' + selector );
+
+		// определение индекса активного слайда
+		let nextslide = slider.getAttribute( 'data-active-slide' );
+
+		// если индекс не определен
+		if ( undefined === nextslide ) {
+
+			// следующим слайдом следует считать 0-й
+			nextslide = 0;
+		} else {
+
+			// определение индекса следующего слайда
+			nextslide++;
 		}
+
+		// определение всех слайдов внутри слайдера
+		let slides = slider.querySelectorAll( '.' + selector + ' > .js-slide' );
+		let slides_count = slides.length;
+
+		// перебор слайдов
+		slides.forEach( function ( slide, i ) {
+
+			// добавление скрывающего класса
+			slides[ i ].classList.add( 'hidden' );
+		} );
+
+		if ( slides_count === nextslide ) {
+			button.classList.add( 'hidden' );
+		} else {
+			// удаление скрывающего класса со слайда, на который произошло переключение
+			slides[ nextslide ].classList.remove( 'hidden' );
+
+			// указание индекса текущего слайда в атрибуте слайдера
+			slider.setAttribute( 'data-active-slide', nextslide );
+		}
+
 	}
 
 	on( 'submit', '.js-phrases-text', get_phrases );
