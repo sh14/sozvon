@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<ul class="screen js-screen-slider">
+	<li class="screen__slide js-slide">
+		<div class="caption" data-slider="js-screen-slider" data-active-slide="0">Созвон</div>
+	</li>
+	<li class="screen__slide hidden js-slide">
+		<form action="" class="form js-phrases-text">
+			<div class="form__group">
+				<textarea name="phrases"  class="form__control">
+					Это все дико, например
+					Тем, кто ложится спать - спокойного сна
+					Ложкой снег мешая, ночь идет большая
+
+				</textarea>
+				<button
+						type="submit"
+						class="form__button js-phrases-text"
+						data-slider="js-screen-slider"
+				>ОК</button>
+			</div>
+		</form>
+	</li>
+	<li class="screen__slide hidden js-slide">
+
+		<ul class="list js-phases-list"></ul>
+
+		<button
+				type="button"
+				class="button js-next-phrase "
+				data-slider="js-phases-list"
+		>Далее</button>
+
+	</li>
+</ul>
+
+<script src="functions.js"></script>
+
+</body>
+</html>
